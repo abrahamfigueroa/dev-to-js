@@ -22,11 +22,11 @@ const cardCreation = (nombre, descripcion, imagen, fechaDeCreacion, etiquetas) =
   name.classList.add("h5", "card-title");
   name.innerHTML = "<strong>"+nombre+"</strong>";
 
-  /* const tagsArray = document.createElement("div");
-  tagsArray.classList.add("d-flex justify-content-start");
+  // const tagsArray = document.createElement("div");
+  // tagsArray.classList.add("d-flex justify-content-start");
   
-  const tags = document.createElement("p");
-  tags.innerHTML = etiquetas; */
+  // const tags = document.createElement("p");
+  // tags.innerHTML = etiquetas;
 
   const description = document.createElement("p"); // Descripción del post
   description.classList.add("card-text");
@@ -44,6 +44,8 @@ const cardCreation = (nombre, descripcion, imagen, fechaDeCreacion, etiquetas) =
   if(fechaDeCreacion!=null)cardBody.appendChild(creationDate); // Si el campo de fecha de creación esta vacío, se omite añadir este elemento al DOM
   cardBody.appendChild(name);
   cardBody.appendChild(description);
+  // cardBody.appendChild(tagsArray);
+  // if(etiquetastags!=null) tagsArray.appendChild(tags);
   cardBody.appendChild(editButton);
   cardBody.appendChild(deleteButton);
   card.appendChild(cardBody);
