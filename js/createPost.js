@@ -1,12 +1,12 @@
-import db from "./environment";
+import db from "./environment.js";
 const newTaskDescriptionInput=document.getElementById('addDescription');
 const newTaskTitleInput=document.getElementById('addTitle');
-const newTag=document.getElementById('addTag');
-const newTaskBtn=document.getElementById('new-task__Button');
+const newTag=document.getElementById('addTags');
+const newPostBtn=document.getElementById('publishContent');
 
-newTaskBtn.addEventListener('click',(e)=>{
+newPostBtn.addEventListener('click',(e)=>{
   e.preventDefault();
-  
+ 
   const newPost={
     title: newTaskTitleInput.value,
     tag: newTag.value,
@@ -21,7 +21,7 @@ newTaskBtn.addEventListener('click',(e)=>{
     return res.json();//return devuelve el metodo json y ese metodo intenta leer el contenido de la respuesta
 
   }).then((data)=>{
-    console.log("recibi estos datos",data)
+    console.log("recibi estos datos",data);
   }).catch((err)=>{
     console.error("ocurrio un error",err);
   })
@@ -29,5 +29,6 @@ newTaskBtn.addEventListener('click',(e)=>{
 
   newTaskDescriptionInput.value="";
   newTaskTitleInput.value="";
+  newTag.value="";
 
 });
