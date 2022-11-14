@@ -266,14 +266,38 @@ d="M12 17a2 2 0 1 1 0 4 2 2 0 0 1 0-4Zm0-7a2 2 0 1 1 0 4 2 2 0 0 1 0-4Zm2-5a2 2 
 
 </section>
 
-<!-- Header card -->
+<!-- Content text -->
 <main class="main container-fluid row-md col-md-9 col-lg-6 col-sm-12 col-12" style="background-color: #ffffff";>
-    <div class="div div__container-title p-4">
-        <div class="card style border-0">
-            <input id="addTarea" class="card-header pt-3 border-0 font-monospace" style="background-color: #ffffff"; type="text" placeholder="Write your post content here...">  
+    <div class="div div__container-title p-4 gap-2 h-100">
+        <div class="card style border-0 h-100">
+            <input id="addDescription" class="card-header pt-3 border-0 font-monospace h-100" style="background-color: #ffffff"; type="text" placeholder="Write your post content here...">  
         </div>
     </div>
 </main>
+
+<!-- Buttons footer -->
+
+<section class="sticky-top container-fluid row-md col-md-9 col-lg-6 col-sm-12 col-12 p-3">
+    <div class="container-md d-flex justify-content-start">
+        <button id="publishContent" class="btn btn-primary" type="button">Publish</button>
+        <button class="btn btn-outline-secondary border-0" type="button">Save draft</button>
+        <button class="border-0" ><svg
+xmlns="http://www.w3.org/2000/svg"
+width="24"
+height="24"
+viewBox="0 0 24 24"
+role="img"
+aria-hidden="true"
+class="container__icon"
+>
+<path
+d="m12 1 9.5 5.5v11L12 23l-9.5-5.5v-11L12 1zm0 2.311L4.5 7.653v8.694l7.5 4.342 7.5-4.342V7.653L12 3.311zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0-2a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"
+
+></path>
+</svg></button>
+        <button class="btn btn-outline-secondary border-0" type="button">Revert new changes</button>
+      </div>
+</section>
 
 </body>
 </html>
