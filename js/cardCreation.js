@@ -1,11 +1,11 @@
 //const body = document.querySelector("body");
 const cardsContainer = document.querySelector("#cardsContainer");
-//body.appendChild(content);
+//body.appendChild(const cardsContainer = document.querySelector("#cardsContainer");
 //content.classList.add("d-flex", "flex-wrap");
 
 const cardCreation = (nombre, descripcion, imagen) => {
   const card = document.createElement("div");
-  card.classList.add("card");
+  card.classList.add("card", "mb-2");
 
   const img = document.createElement("img");
   img.classList.add("card-img-top");
@@ -16,7 +16,7 @@ const cardCreation = (nombre, descripcion, imagen) => {
 
   const name = document.createElement("h5");
   name.classList.add("h5", "card-title");
-  name.innerHTML = nombre;
+  name.innerHTML = "<strong>"+nombre+"</strong>";
 
   const description = document.createElement("p");
   description.classList.add("card-text");
