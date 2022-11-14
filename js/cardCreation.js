@@ -3,7 +3,7 @@ const cardsContainer = document.querySelector("#cardsContainer");
 //body.appendChild(content);
 //content.classList.add("d-flex", "flex-wrap");
 
-const cardCreation = (imagen, nombre, descripcion) => {
+const cardCreation = (nombre, descripcion, imagen) => {
   const card = document.createElement("div");
   card.classList.add("card");
 
@@ -22,14 +22,19 @@ const cardCreation = (imagen, nombre, descripcion) => {
   description.classList.add("card-text");
   description.innerHTML = descripcion;
 
-  const a = document.createElement("a");
-  a.classList.add("btn", "btn-primary");
-  a.innerText = "Go somewhere";
+  const editButton = document.createElement("a");
+  editButton.classList.add("btn", "btn-primary", "me-2");
+  editButton.innerText = "Editar";
 
-  cardBody.appendChild(img);
+  const deleteButton = document.createElement("a");
+  deleteButton.classList.add("btn", "btn-danger");
+  deleteButton.innerText = "Borrar";
+
+  if(imagen!=null)cardBody.appendChild(img); // Si el campo de imagen esta vacío, se omite añadir este elemento al DOM
   cardBody.appendChild(name);
   cardBody.appendChild(description);
-  cardBody.appendChild(a);
+  cardBody.appendChild(editButton);
+  cardBody.appendChild(deleteButton);
   card.appendChild(cardBody);
 
   return card;
@@ -40,7 +45,7 @@ const json = [
     nombre: "Spider-Man",
     descripcion:
       "Fue mordido por una araña radioactiva, el estudiante de secundaria Peter Parker ganó la velocidad, la fuerza y los poderes de una araña. Adoptando el nombre de Spider-Man, Peter esperaba comenzar una carrera usando su nueva",
-    img: "https://i0.wp.com/codigoespagueti.com/wp-content/uploads/2021/06/10-curiosidades-de-Spiderman-2002-compressed-1.jpg?fit=1280%2C720&quality=80&ssl=1",
+    img: null,
   },
   {
     nombre: "Batman",
@@ -99,6 +104,6 @@ const json = [
 ];
 
 for (const datos of json) {
-  const card = cardCreation(datos.img, datos.nombre, datos.descripcion);
+  const card = cardCreation(datos.nombre, datos.descripcion, datos.img);
   cardsContainer.appendChild(card);
 };
