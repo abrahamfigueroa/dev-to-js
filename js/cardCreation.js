@@ -3,34 +3,45 @@ const cardsContainer = document.querySelector("#cardsContainer");
 //body.appendChild(const cardsContainer = document.querySelector("#cardsContainer");
 //content.classList.add("d-flex", "flex-wrap");
 
-const cardCreation = (nombre, descripcion, imagen) => {
+const cardCreation = (nombre, descripcion, imagen, fechaDeCreacion, etiquetas) => {
   const card = document.createElement("div");
   card.classList.add("card", "mb-2");
 
-  const img = document.createElement("img");
+  const img = document.createElement("img"); //Imagen de la card
   img.classList.add("card-img-top");
   img.src = imagen;
 
-  const cardBody = document.createElement("div");
+  const cardBody = document.createElement("div"); // Este es el div del cuerpo de la card
   cardBody.classList.add("card-body");
 
-  const name = document.createElement("h5");
+  const creationDate = document.createElement("p"); // Fecha de creación del post
+  creationDate.classList.add("card-text");
+  creationDate.innerHTML = fechaDeCreacion;
+
+  const name = document.createElement("h5"); // Título del post
   name.classList.add("h5", "card-title");
   name.innerHTML = "<strong>"+nombre+"</strong>";
 
-  const description = document.createElement("p");
+  /* const tagsArray = document.createElement("div");
+  tagsArray.classList.add("d-flex justify-content-start");
+  
+  const tags = document.createElement("p");
+  tags.innerHTML = etiquetas; */
+
+  const description = document.createElement("p"); // Descripción del post
   description.classList.add("card-text");
   description.innerHTML = descripcion;
 
-  const editButton = document.createElement("a");
+  const editButton = document.createElement("a"); // Botón editar
   editButton.classList.add("btn", "btn-primary", "me-2");
   editButton.innerText = "Editar";
 
-  const deleteButton = document.createElement("a");
+  const deleteButton = document.createElement("a"); // Boton eliminar
   deleteButton.classList.add("btn", "btn-danger");
   deleteButton.innerText = "Borrar";
 
   if(imagen!=null)cardBody.appendChild(img); // Si el campo de imagen esta vacío, se omite añadir este elemento al DOM
+  if(fechaDeCreacion!=null)cardBody.appendChild(creationDate); // Si el campo de fecha de creación esta vacío, se omite añadir este elemento al DOM
   cardBody.appendChild(name);
   cardBody.appendChild(description);
   cardBody.appendChild(editButton);
@@ -46,6 +57,7 @@ const json = [
     descripcion:
       "Fue mordido por una araña radioactiva, el estudiante de secundaria Peter Parker ganó la velocidad, la fuerza y los poderes de una araña. Adoptando el nombre de Spider-Man, Peter esperaba comenzar una carrera usando su nueva",
     img: null,
+    creationDate: "18:00 hrs, 29/08/1990"
   },
   {
     nombre: "Batman",
@@ -104,6 +116,6 @@ const json = [
 ];
 
 for (const datos of json) {
-  const card = cardCreation(datos.nombre, datos.descripcion, datos.img);
+  const card = cardCreation(datos.nombre, datos.descripcion, datos.img, datos.creationDate);
   cardsContainer.appendChild(card);
 };
