@@ -11,7 +11,7 @@ newPostBtn.addEventListener('click',(e)=>{
     title: newTaskTitleInput.value,
     tag: newTag.value,
     description:newTaskDescriptionInput.value,
-    isCompleted:false
+    // isCompleted:false
   };
   fetch(db+".json",{
     method: 'POST', 
