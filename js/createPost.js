@@ -3,22 +3,20 @@ const newTaskDescriptionInput=document.getElementById('addDescription');
 const newTaskTitleInput=document.getElementById('addTitle');
 const newTag=document.getElementById('addTags');
 const newPostBtn=document.getElementById('publishContent');
-const date = new Date();
-const day = date.getDate();
-const month = date.getMonth();
-const year = date.getFullYear();
-const imgurl=document.querySelector('#');
+
+const imgurl=document.querySelector('#addCoverImage');
 
 
 newPostBtn.addEventListener('click',(e)=>{
-  e.preventDefault();
+
+  const date = new Date();
  
   const newPost={
     title: newTaskTitleInput.value,
     tag: newTag.value,
     description:newTaskDescriptionInput.value,
-    imagen: imgurl.value,
-    fecha: day+'/'+month+'/'+year
+    image: imgurl.value,
+    fecha: date.toISOString()
   };
   fetch(db+".json",{
     method: 'POST', 
