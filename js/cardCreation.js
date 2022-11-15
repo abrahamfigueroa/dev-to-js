@@ -3,7 +3,7 @@ const cardsContainer = document.querySelector("#cardsContainer");
 //body.appendChild(const cardsContainer = document.querySelector("#cardsContainer");
 //content.classList.add("d-flex", "flex-wrap");
 
-const cardCreation = (nombre, descripcion, imagen, fechaDeCreacion, etiquetas) => {
+export const cardCreation = (nombre, descripcion, imagen, fechaDeCreacion, etiquetas) => {
   const card = document.createElement("div");
   card.classList.add("card", "mb-2");
 
