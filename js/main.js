@@ -83,7 +83,6 @@ const cardCreation = (nombre, descripcion, imagen, fechaDeCreacion, etiquetas) =
     if(imagen!=null)cardBody.appendChild(img); // Si el campo de imagen esta vacío, se omite añadir este elemento al DOM
     if(fechaDeCreacion!=null)cardBody.appendChild(creationDate); // Si el campo de fecha de creación esta vacío, se omite añadir este elemento al DOM
     cardBody.appendChild(name);
-    cardBody.appendChild(description);
     cardBody.appendChild(tagsArray);
     if(etiquetas!=null) tagsArray.appendChild(tags);
     cardBody.appendChild(editButton);
