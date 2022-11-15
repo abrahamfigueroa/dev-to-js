@@ -113,8 +113,8 @@ const cardCreation = (
   cardBody.appendChild(name);
   cardBody.appendChild(tagsArray);
   if (etiquetas != null) tagsArray.appendChild(tags);
-  cardBody.appendChild(editButton);
-  cardBody.appendChild(deleteButton);
+  // cardBody.appendChild(editButton);
+  // cardBody.appendChild(deleteButton);
   card.appendChild(cardBody);
   return card;
 };
