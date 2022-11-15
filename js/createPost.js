@@ -17,6 +17,7 @@ newPostBtn.addEventListener('click',(e)=>{
     description:newTaskDescriptionInput.value,
     image: imgurl.value,
     fecha: date.toISOString()
+
   };
   fetch(db+".json",{
     method: 'POST', 
