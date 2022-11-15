@@ -4,16 +4,16 @@ const deletePostButton = document.querySelector("#deletePostButton");
 
 // Método eliminar
 
-// deletePostButton.addEventListener("click", (e) => {
-//   const deletePost = (id) => {
-//     fetch(`${db}/${id}.json`, {
-//       //agregar variable ID del objeto a eliminar
-//       method: "DELETE",
-//     })
-//       .then((res) => res.json())
-//       .then((data) => console.log("Elemento eliminado", data));
-//   };
-// });
+/* deletePostButton.addEventListener("click", (e) => {
+  const deletePost = (id) => {
+    fetch(`${db}/${id}.json`, {
+      //agregar variable ID del objeto a eliminar
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => console.log("Elemento eliminado", data));
+  };
+}); */
 
 // Método Get All Posts
 
@@ -24,7 +24,7 @@ const getAllPosts = () => {
     .then((response) => response.json())
     .then((result) => {
       const keys = Object.keys(result);
-      const idPosts = keys.reduce((prev, act) => {
+      const allPostsArray = keys.reduce((prev, act) => {
         const postAct = result[act];
         const postCompleto = {
           id: act,
@@ -33,8 +33,8 @@ const getAllPosts = () => {
         prev.push(postCompleto);
         return prev;
       }, []);
-      console.log(idPosts);
-      for (const post of idPosts.reverse()) {
+      console.log(allPostsArray);
+      for (const post of allPostsArray.reverse()) {
         const card = cardCreation(
           post.title,
           post.description,
@@ -47,6 +47,17 @@ const getAllPosts = () => {
     });
 };
 
+/* const getAPosts = (id) => {
+  fetch(db+"/"+id+".json", {
+    method: "GET",
+  })
+    .then((response) => response.json())
+    .then((result) => Post = {
+      resultado = result;
+      console.log(result);
+    },);
+}; */
+
 getAllPosts(); // Mandamos llamar al método getAllPosts quien obtiene los datos de firebase y los usa para construir las cards mediante cardCreation
 
 // Card Creation Method
@@ -56,7 +67,8 @@ const cardCreation = (
   descripcion,
   imagen,
   fechaDeCreacion,
-  etiquetas
+  etiquetas,
+  id
 ) => {
   const card = document.createElement("div");
   card.classList.add("card", "mb-2");
@@ -80,9 +92,7 @@ const cardCreation = (
   tagsArray.classList.add("d-flex", "justify-content-start");
 
   const tags = document.createElement("p");
-  if (etiquetas[0] != "#") {
-    tags.innerHTML = "#" + etiquetas;
-  } else tags.innerHTML = etiquetas;
+  tags.innerHTML = "#" + etiquetas;
   tags.classList.add("mx-2");
 
   const description = document.createElement("p"); // Descripción del post
@@ -96,6 +106,7 @@ const cardCreation = (
   const deleteButton = document.createElement("a"); // Boton eliminar
   deleteButton.classList.add("btn", "btn-danger");
   deleteButton.innerText = "Borrar";
+  deleteButton.setAttribute("id", id);
 
   if (imagen != null) cardBody.appendChild(img); // Si el campo de imagen esta vacío, se omite añadir este elemento al DOM
   if (fechaDeCreacion != null) cardBody.appendChild(creationDate); // Si el campo de fecha de creación esta vacío, se omite añadir este elemento al DOM
@@ -105,6 +116,5 @@ const cardCreation = (
   cardBody.appendChild(editButton);
   cardBody.appendChild(deleteButton);
   card.appendChild(cardBody);
-
   return card;
 };
