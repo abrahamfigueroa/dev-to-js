@@ -9,11 +9,11 @@ let descendingOrder = true;
 
 orderButton.addEventListener("click", (e) => {
   e.preventDefault();
-  console.log("boton activado")
+  console.log("boton activado");
   descendingOrder = !descendingOrder;
   cardsContainer.innerHTML = "";
   getAllPosts();
-  $("#cardsContainer").load(window.location.href + " #cardsContainer" );
+  $("#cardsContainer").load(window.location.href + " #cardsContainer");
 });
 
 // Método Get All Posts
@@ -37,6 +37,9 @@ const getAllPosts = () => {
       console.log(allPostsArray);
       if (descendingOrder == true) {
         for (const post of allPostsArray.reverse()) {
+          const date=  new Date(post.fecha)
+          let month = date.getMonth();
+          console.log(month);
           const card = cardCreation(
             post.title,
             post.description,
@@ -49,6 +52,9 @@ const getAllPosts = () => {
         }
       } else {
         for (const post of allPostsArray) {
+          const date=  new Date(post.fecha)
+          let month = date.getMonth();
+          console.log(month);
           const card = cardCreation(
             post.title,
             post.description,
@@ -68,12 +74,12 @@ getAllPosts(descendingOrder); // Mandamos llamar al método getAllPosts quien ob
 // Metodo Get a Post (obteniendo la info de un solo post)
 
 const getAPosts = (db, id) => {
-  fetch(db+"/"+id+".json", {
-    method: "GET"
+  fetch(db + "/" + id + ".json", {
+    method: "GET",
   })
     .then((response) => response.json())
     .then((result) => console.log(result))
-    .catch((err) => console.log(err))
+    .catch((err) => console.log(err));
 };
 
 // Card Creation Method
@@ -88,7 +94,7 @@ const cardCreation = (
 ) => {
   const card = document.createElement("div");
   card.classList.add("card", "mb-2");
-  card.setAttribute("id", "card"+id);
+  card.setAttribute("id", "card" + id);
 
   const img = document.createElement("img"); //Imagen de la card
   img.classList.add("card-img-top");
@@ -96,7 +102,7 @@ const cardCreation = (
 
   const cardBody = document.createElement("div"); // Este es el div del cuerpo de la card
   cardBody.classList.add("card-body");
-  cardBody.setAttribute('onclick', "window.location.href='./post.html'")
+  cardBody.setAttribute("onclick", "window.location.href='./post.html'");
 
   const creationDate = document.createElement("p"); // Fecha de creación del post
   creationDate.classList.add("card-text");
@@ -139,4 +145,50 @@ const cardCreation = (
   cardBody.appendChild(deleteButton);
   card.appendChild(cardBody);
   return card;
+};
+
+// Filtrado
+
+const getByMonth = (mes) => {
+  fetch(db + ".json", {
+    method: "GET",
+  })
+    .then((response) => response.json())
+    .then((result) => {
+      const keys = Object.keys(result);
+      const allPostsArray = keys.reduce((prev, act) => {
+        const postAct = result[act];
+        const postCompleto = {
+          id: act,
+          ...postAct,
+        };
+        prev.push(postCompleto);
+        return prev;
+      }, []);
+      if (descendingOrder == true) {
+        for (const post of allPostsArray.reverse()) {
+          const card = cardCreation(
+            post.title,
+            post.description,
+            post.image,
+            post.fecha,
+            post.tag,
+            post.id
+          );
+          cardsContainer.appendChild(card);
+        }
+      } else {
+        for (const post of allPostsArray) {
+          const card = cardCreation(
+            post.title,
+            post.description,
+            post.image,
+            post.fecha,
+            post.tag,
+            post.id
+          );
+          cardsContainer.appendChild(card);
+        }
+      }
+    });
 };
