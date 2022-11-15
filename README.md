@@ -42,4 +42,5 @@ Para el desafío del módulo de JavaScript se deberá considerar lo siguiente:
 
 ## Links
 * Notion: https://innovacarbdev.notion.site/Reto-de-JavaScript-25aed06539cc42c0aa454f150e2e6506
+* Prezzi: https://prezi.com/view/V4FB2w6IxMqrVFsnqXSk/
 * Vercel Deploynment: 
