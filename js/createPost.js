@@ -3,7 +3,7 @@ const newTaskDescriptionInput=document.getElementById('addDescription');
 const newTaskTitleInput=document.getElementById('addTitle');
 const newTag=document.getElementById('addTags');
 const newPostBtn=document.getElementById('publishContent');
-const params = new URLSearchParams(window.location.search)
+const params = window.location.href;
 console.log(params);
 const id = params.get("id");
 const edit = params.get("edit");
@@ -11,7 +11,6 @@ const edit = params.get("edit");
 console.log(id);
 
 const imgurl=document.querySelector('#addCoverImage');
-
 
 newPostBtn.addEventListener('click',(e)=>{
 
