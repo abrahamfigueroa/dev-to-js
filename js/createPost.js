@@ -3,7 +3,6 @@ const newTaskDescriptionInput=document.getElementById('addDescription');
 const newTaskTitleInput=document.getElementById('addTitle');
 const newTag=document.getElementById('addTags');
 const newPostBtn=document.getElementById('publishContent');
-
 const imgurl=document.querySelector('#addCoverImage');
 
 
