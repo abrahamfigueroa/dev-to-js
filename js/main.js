@@ -4,16 +4,16 @@ const deletePostButton = document.querySelector("#deletePostButton");
 
 // Método eliminar
 
-deletePostButton.addEventListener("click", (e) => {
-  const deletePost = (id) => {
-    fetch(`${db}/${id}.json`, {
-      //agregar variable ID del objeto a eliminar
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((data) => console.log("Elemento eliminado", data));
-  };
-});
+// deletePostButton.addEventListener("click", (e) => {
+//   const deletePost = (id) => {
+//     fetch(`${db}/${id}.json`, {
+//       //agregar variable ID del objeto a eliminar
+//       method: "DELETE",
+//     })
+//       .then((res) => res.json())
+//       .then((data) => console.log("Elemento eliminado", data));
+//   };
+// });
 
 // Método Get All Posts
 
