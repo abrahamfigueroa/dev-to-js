@@ -1,4 +1,5 @@
 import db from "./environment.js";
+import { removePostMethod } from "./removePost.js";
 const cardsContainer = document.querySelector("#cardsContainer");
 
 // Botón y evento ordenar por fecha
@@ -77,10 +78,6 @@ getAllPosts(descendingOrder); // Mandamos llamar al método getAllPosts quien ob
     },);
 }; */
 
-const removerwea = (id) => {
-  console.log("ejecutando "+id)
-}
-
 // Card Creation Method
 
 const cardCreation = (
@@ -128,12 +125,11 @@ const cardCreation = (
   const deleteButton = document.createElement("a"); // Boton eliminar
   deleteButton.classList.add("btn", "btn-danger", "buttonToRemoveCard");
   deleteButton.innerText = "Borrar";
-  deleteButton.onclick = function(){
-    var inputId = "card"+id;
-    var input = document.getElementById(inputId);
-    input.parentNode.removeChild(input);
-    console.log("Este boton es el: "+id);
-  };
+  deleteButton.addEventListener("click", () => {
+    removePostMethod(db, id);
+    cardsContainer.innerHTML = "";
+    getAllPosts(descendingOrder);
+  });
 
   if (imagen != null) cardBody.appendChild(img); // Si el campo de imagen esta vacío, se omite añadir este elemento al DOM
   if (fechaDeCreacion != null) cardBody.appendChild(creationDate); // Si el campo de fecha de creación esta vacío, se omite añadir este elemento al DOM
@@ -145,18 +141,3 @@ const cardCreation = (
   card.appendChild(cardBody);
   return card;
 };
-
-// Método eliminar
-
-/* removeButton.addEventListener("click", (e) => {
-console.log("clic en la card");
-  const id = e.target.value;
-  const deletePost = (id) => {
-    fetch(`${db}/${id}.json`, {
-      //agregar variable ID del objeto a eliminar
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((data) => console.log("Elemento eliminado", data));
-  };
-}); */
