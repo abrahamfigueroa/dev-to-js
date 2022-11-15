@@ -1,4 +1,5 @@
 import db from "./environment.js";
+import { removePostMethod } from "./removePost.js";
 const cardsContainer = document.querySelector("#cardsContainer");
 
 // Botón y evento ordenar por fecha
@@ -14,20 +15,6 @@ orderButton.addEventListener("click", (e) => {
   getAllPosts();
   $("#cardsContainer").load(window.location.href + " #cardsContainer" );
 });
-
-// Método eliminar
-
-/* deletePostButton.addEventListener("click", (e) => {
-  const id = e.target.value;
-  const deletePost = (id) => {
-    fetch(`${db}/${id}.json`, {
-      //agregar variable ID del objeto a eliminar
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((data) => console.log("Elemento eliminado", data));
-  };
-}); */
 
 // Método Get All Posts
 
@@ -76,6 +63,10 @@ const getAllPosts = () => {
     });
 };
 
+getAllPosts(descendingOrder); // Mandamos llamar al método getAllPosts quien obtiene los datos de firebase y los usa para construir las cards mediante cardCreation
+
+// Metodo Get a Post (obteniendo la info de un solo post)
+
 /* const getAPosts = (id) => {
   fetch(db+"/"+id+".json", {
     method: "GET",
@@ -86,8 +77,6 @@ const getAllPosts = () => {
       console.log(result);
     },);
 }; */
-
-getAllPosts(descendingOrder); // Mandamos llamar al método getAllPosts quien obtiene los datos de firebase y los usa para construir las cards mediante cardCreation
 
 // Card Creation Method
 
@@ -101,7 +90,7 @@ const cardCreation = (
 ) => {
   const card = document.createElement("div");
   card.classList.add("card", "mb-2");
-  card.setAttribute("id", id);
+  card.setAttribute("id", "card"+id);
 
   const img = document.createElement("img"); //Imagen de la card
   img.classList.add("card-img-top");
@@ -135,9 +124,13 @@ const cardCreation = (
   editButton.innerText = "Editar";
 
   const deleteButton = document.createElement("a"); // Boton eliminar
-  deleteButton.classList.add("btn", "btn-danger");
+  deleteButton.classList.add("btn", "btn-danger", "buttonToRemoveCard");
   deleteButton.innerText = "Borrar";
-  deleteButton.setAttribute("id", id);
+  deleteButton.addEventListener("click", () => {
+    removePostMethod(db, id);
+    cardsContainer.innerHTML = "";
+    getAllPosts(descendingOrder);
+  });
 
   if (imagen != null) cardBody.appendChild(img); // Si el campo de imagen esta vacío, se omite añadir este elemento al DOM
   if (fechaDeCreacion != null) cardBody.appendChild(creationDate); // Si el campo de fecha de creación esta vacío, se omite añadir este elemento al DOM
@@ -145,7 +138,7 @@ const cardCreation = (
   cardBody.appendChild(tagsArray);
   if (etiquetas != null) tagsArray.appendChild(tags);
   // cardBody.appendChild(editButton);
-  // cardBody.appendChild(deleteButton);
+  cardBody.appendChild(deleteButton);
   card.appendChild(cardBody);
   return card;
 };
