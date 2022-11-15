@@ -1,10 +1,24 @@
 import db from "./environment.js";
 const cardsContainer = document.querySelector("#cardsContainer");
-const deletePostButton = document.querySelector("#deletePostButton");
+
+// Botón y evento ordenar por fecha
+
+const orderButton = document.querySelector("#orderByButton");
+let descendingOrder = true;
+
+orderButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  console.log("boton activado")
+  descendingOrder = !descendingOrder;
+  cardsContainer.innerHTML = "";
+  getAllPosts();
+  $("#cardsContainer").load(window.location.href + " #cardsContainer" );
+});
 
 // Método eliminar
 
 /* deletePostButton.addEventListener("click", (e) => {
+  const id = e.target.value;
   const deletePost = (id) => {
     fetch(`${db}/${id}.json`, {
       //agregar variable ID del objeto a eliminar
@@ -34,16 +48,30 @@ const getAllPosts = () => {
         return prev;
       }, []);
       console.log(allPostsArray);
-      for (const post of allPostsArray.reverse()) {
-        const card = cardCreation(
-          post.title,
-          post.description,
-          post.image,
-          post.fecha,
-          post.tag,
-          post.id
-        );
-        cardsContainer.appendChild(card);
+      if (descendingOrder == true) {
+        for (const post of allPostsArray.reverse()) {
+          const card = cardCreation(
+            post.title,
+            post.description,
+            post.image,
+            post.fecha,
+            post.tag,
+            post.id
+          );
+          cardsContainer.appendChild(card);
+        }
+      } else {
+        for (const post of allPostsArray) {
+          const card = cardCreation(
+            post.title,
+            post.description,
+            post.image,
+            post.fecha,
+            post.tag,
+            post.id
+          );
+          cardsContainer.appendChild(card);
+        }
       }
     });
 };
@@ -59,7 +87,7 @@ const getAllPosts = () => {
     },);
 }; */
 
-getAllPosts(); // Mandamos llamar al método getAllPosts quien obtiene los datos de firebase y los usa para construir las cards mediante cardCreation
+getAllPosts(descendingOrder); // Mandamos llamar al método getAllPosts quien obtiene los datos de firebase y los usa para construir las cards mediante cardCreation
 
 // Card Creation Method
 
