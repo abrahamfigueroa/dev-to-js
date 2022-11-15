@@ -15,20 +15,6 @@ orderButton.addEventListener("click", (e) => {
   $("#cardsContainer").load(window.location.href + " #cardsContainer" );
 });
 
-// Método eliminar
-
-/* deletePostButton.addEventListener("click", (e) => {
-  const id = e.target.value;
-  const deletePost = (id) => {
-    fetch(`${db}/${id}.json`, {
-      //agregar variable ID del objeto a eliminar
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((data) => console.log("Elemento eliminado", data));
-  };
-}); */
-
 // Método Get All Posts
 
 const getAllPosts = () => {
@@ -76,6 +62,10 @@ const getAllPosts = () => {
     });
 };
 
+getAllPosts(descendingOrder); // Mandamos llamar al método getAllPosts quien obtiene los datos de firebase y los usa para construir las cards mediante cardCreation
+
+// Metodo Get a Post (obteniendo la info de un solo post)
+
 /* const getAPosts = (id) => {
   fetch(db+"/"+id+".json", {
     method: "GET",
@@ -86,8 +76,6 @@ const getAllPosts = () => {
       console.log(result);
     },);
 }; */
-
-getAllPosts(descendingOrder); // Mandamos llamar al método getAllPosts quien obtiene los datos de firebase y los usa para construir las cards mediante cardCreation
 
 // Card Creation Method
 
@@ -134,9 +122,8 @@ const cardCreation = (
   editButton.innerText = "Editar";
 
   const deleteButton = document.createElement("a"); // Boton eliminar
-  deleteButton.classList.add("btn", "btn-danger");
+  deleteButton.classList.add("btn", "btn-danger", "buttonToRemoveCard");
   deleteButton.innerText = "Borrar";
-  deleteButton.setAttribute("id", id);
 
   if (imagen != null) cardBody.appendChild(img); // Si el campo de imagen esta vacío, se omite añadir este elemento al DOM
   if (fechaDeCreacion != null) cardBody.appendChild(creationDate); // Si el campo de fecha de creación esta vacío, se omite añadir este elemento al DOM
@@ -144,7 +131,30 @@ const cardCreation = (
   cardBody.appendChild(tagsArray);
   if (etiquetas != null) tagsArray.appendChild(tags);
   // cardBody.appendChild(editButton);
-  // cardBody.appendChild(deleteButton);
+  cardBody.appendChild(deleteButton);
   card.appendChild(cardBody);
   return card;
 };
+
+// Método eliminar
+
+
+
+
+
+const removeButton = document.querySelectorAll(".buttonToRemoveCard");
+const action = () => alert("Hello!");
+removeButton.addEventListener("click", action);
+
+/* removeButton.addEventListener("click", (e) => {
+console.log("clic en la card");
+  const id = e.target.value;
+  const deletePost = (id) => {
+    fetch(`${db}/${id}.json`, {
+      //agregar variable ID del objeto a eliminar
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => console.log("Elemento eliminado", data));
+  };
+}); */
