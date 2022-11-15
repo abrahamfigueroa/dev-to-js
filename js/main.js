@@ -77,6 +77,10 @@ getAllPosts(descendingOrder); // Mandamos llamar al método getAllPosts quien ob
     },);
 }; */
 
+const removerwea = (id) => {
+  console.log("ejecutando "+id)
+}
+
 // Card Creation Method
 
 const cardCreation = (
@@ -89,7 +93,7 @@ const cardCreation = (
 ) => {
   const card = document.createElement("div");
   card.classList.add("card", "mb-2");
-  card.setAttribute("id", id);
+  card.setAttribute("id", "card"+id);
 
   const img = document.createElement("img"); //Imagen de la card
   img.classList.add("card-img-top");
@@ -124,6 +128,12 @@ const cardCreation = (
   const deleteButton = document.createElement("a"); // Boton eliminar
   deleteButton.classList.add("btn", "btn-danger", "buttonToRemoveCard");
   deleteButton.innerText = "Borrar";
+  deleteButton.onclick = function(){
+    var inputId = "card"+id;
+    var input = document.getElementById(inputId);
+    input.parentNode.removeChild(input);
+    console.log("Este boton es el: "+id);
+  };
 
   if (imagen != null) cardBody.appendChild(img); // Si el campo de imagen esta vacío, se omite añadir este elemento al DOM
   if (fechaDeCreacion != null) cardBody.appendChild(creationDate); // Si el campo de fecha de creación esta vacío, se omite añadir este elemento al DOM
@@ -137,14 +147,6 @@ const cardCreation = (
 };
 
 // Método eliminar
-
-
-
-
-
-const removeButton = document.querySelectorAll(".buttonToRemoveCard");
-const action = () => alert("Hello!");
-removeButton.addEventListener("click", action);
 
 /* removeButton.addEventListener("click", (e) => {
 console.log("clic en la card");
