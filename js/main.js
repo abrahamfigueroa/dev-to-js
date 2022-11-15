@@ -67,16 +67,14 @@ getAllPosts(descendingOrder); // Mandamos llamar al método getAllPosts quien ob
 
 // Metodo Get a Post (obteniendo la info de un solo post)
 
-/* const getAPosts = (id) => {
+const getAPosts = (db, id) => {
   fetch(db+"/"+id+".json", {
-    method: "GET",
+    method: "GET"
   })
     .then((response) => response.json())
-    .then((result) => Post = {
-      resultado = result;
-      console.log(result);
-    },);
-}; */
+    .then((result) => console.log(result))
+    .catch((err) => console.log(err))
+};
 
 // Card Creation Method
 
