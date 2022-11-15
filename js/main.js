@@ -40,7 +40,8 @@ const getAllPosts = () => {
           post.description,
           post.image,
           post.fecha,
-          post.tag
+          post.tag,
+          post.id
         );
         cardsContainer.appendChild(card);
       }
@@ -72,6 +73,7 @@ const cardCreation = (
 ) => {
   const card = document.createElement("div");
   card.classList.add("card", "mb-2");
+  card.setAttribute("id", id);
 
   const img = document.createElement("img"); //Imagen de la card
   img.classList.add("card-img-top");
