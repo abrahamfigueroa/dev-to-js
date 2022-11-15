@@ -24,6 +24,7 @@ newPostBtn.addEventListener('click',(e)=>{
     headers: {"Content-Type": "applicaction/json"}, //que tipo de paquete vamos a enviar
     body:JSON.stringify(newPost),
   }).then((res)=>{
+    window.location.replace('./index.html');
     return res.json();//return devuelve el metodo json y ese metodo intenta leer el contenido de la respuesta
 
   }).then((data)=>{
