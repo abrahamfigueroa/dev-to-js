@@ -12,7 +12,7 @@ const deletePost = (id) => {
     .then((data) => console.log("Elemento eliminado", data));
 };
 
-// Método Get all posts
+// Método Get All Posts
 
 const getAllPosts = () => {
   fetch(db + ".json", {
@@ -21,24 +21,26 @@ const getAllPosts = () => {
     .then((response) => response.json())
     .then((result) => {
       const keys = Object.keys(result);
-      const idTareas = keys.reduce((prev, act) => {
-        const tareaAct = result[act];
-        const tareaCompleta = {
+      const idPosts = keys.reduce((prev, act) => {
+        const postAct = result[act];
+        const postCompleto = {
           id: act,
-          ...tareaAct,
+          ...postAct,
         };
-        prev.push(tareaCompleta);
+        prev.push(postCompleto);
         return prev;
       }, []);
-      console.log(idTareas);
-      for (const post of idTareas) {
+      console.log(idPosts);
+      for (const post of idPosts.reverse()) {
         const card = cardCreation(post.title, post.description);
         cardsContainer.appendChild(card);
       };
     });
 };
 
-getAllPosts();
+getAllPosts(); // Mandamos llamar al método getAllPosts quien obtiene los datos de firebase y los usa para construir las cards mediante cardCreation
+
+// Card Creation Method
 
 const cardCreation = (nombre, descripcion, imagen, fechaDeCreacion, etiquetas) => {
     const card = document.createElement("div");
