@@ -81,6 +81,7 @@ const cardCreation = (
 
   const cardBody = document.createElement("div"); // Este es el div del cuerpo de la card
   cardBody.classList.add("card-body");
+  cardBody.setAttribute('onclick', "window.location.href='./post.html'")
 
   const creationDate = document.createElement("p"); // Fecha de creación del post
   creationDate.classList.add("card-text");
