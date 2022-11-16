@@ -8,10 +8,33 @@ const thisYear = document.querySelector("#thisYear");
 
 orderButton.addEventListener("click", (e) => {
   e.preventDefault();
-  console.log("boton activado");
   descendingOrder = !descendingOrder;
   cardsContainer.innerHTML = "";
   getAllPosts();
+  $("#cardsContainer").load(window.location.href + " #cardsContainer");
+});
+
+thisWeek.addEventListener("click", (e) => {
+  e.preventDefault();
+  const filter = "week";
+  cardsContainer.innerHTML = "";
+  getAllPosts(filter);
+  $("#cardsContainer").load(window.location.href + " #cardsContainer");
+});
+
+thisMonth.addEventListener("click", (e) => {
+  e.preventDefault();
+  const filter = "month";
+  cardsContainer.innerHTML = "";
+  getAllPosts(filter);
+  $("#cardsContainer").load(window.location.href + " #cardsContainer");
+});
+
+thisYear.addEventListener("click", (e) => {
+  e.preventDefault();
+  const filter = "year";
+  cardsContainer.innerHTML = "";
+  getAllPosts(filter);
   $("#cardsContainer").load(window.location.href + " #cardsContainer");
 });
 
@@ -33,45 +56,149 @@ export const getAllPosts = (filter) => {
       }, []);
       if (descendingOrder == true) {
         for (const post of allPostsArray.reverse()) {
+          // Obteniendo la fecha, semana, mes y año del post
           const date = new Date(post.fecha);
-          let month = date.getMonth();
-          let year = date.getFullYear();
-          
-          var oneJan = new Date(date.getFullYear(),0,1);
-          var numberOfDays = Math.floor((date - oneJan) / (24 * 60 * 60 * 1000));
-          var week = Math.ceil(( date.getDay() + 1 + numberOfDays) / 7);
-
-          console.log(week);
-          console.log(month);
-          console.log(year);
-
-          if ((filter = "year")) {
-          }
-          
-          const card = cardCreation(
-            post.title,
-            post.description,
-            post.image,
-            post.fecha,
-            post.tag,
-            post.id
+          const monthPost = date.getMonth();
+          const yearPost = date.getFullYear();
+          const oneJanPost = new Date(date.getFullYear(), 0, 1);
+          const numberOfDaysPost = Math.floor(
+            (date - oneJanPost) / (24 * 60 * 60 * 1000)
           );
-          cardsContainer.appendChild(card);
+          const weekPost = Math.ceil(
+            (date.getDay() + 1 + numberOfDaysPost) / 7
+          );
+
+          // Obteniendo la fecha, semana, mes y año de hoy
+          const currentdate = new Date();
+          const oneJan = new Date(currentdate.getFullYear(), 0, 1);
+          const numberOfDays = Math.floor(
+            (currentdate - oneJan) / (24 * 60 * 60 * 1000)
+          );
+          const week = Math.ceil((currentdate.getDay() + 1 + numberOfDays) / 7);
+          const month = date.getMonth();
+          const year = date.getFullYear();
+          if ((filter = "week")) {
+            if (weekPost == week) {
+              const card = cardCreation(
+                post.title,
+                post.description,
+                post.image,
+                post.fecha,
+                post.tag,
+                post.id
+              );
+              cardsContainer.appendChild(card);
+            }
+          }
+          if ((filter = "month")) {
+            if (monthPost == month) {
+              const card = cardCreation(
+                post.title,
+                post.description,
+                post.image,
+                post.fecha,
+                post.tag,
+                post.id
+              );
+              cardsContainer.appendChild(card);
+            }
+          }
+          if ((filter = "year")) {
+            if (yearPost == year) {
+              const card = cardCreation(
+                post.title,
+                post.description,
+                post.image,
+                post.fecha,
+                post.tag,
+                post.id
+              );
+              cardsContainer.appendChild(card);
+            }
+          } else {
+            const card = cardCreation(
+              post.title,
+              post.description,
+              post.image,
+              post.fecha,
+              post.tag,
+              post.id
+            );
+            cardsContainer.appendChild(card);
+          }
         }
       } else {
         for (const post of allPostsArray) {
+          // Obteniendo la fecha, semana, mes y año del post
           const date = new Date(post.fecha);
-          let month = date.getMonth();
-          console.log(month);
-          const card = cardCreation(
-            post.title,
-            post.description,
-            post.image,
-            post.fecha,
-            post.tag,
-            post.id
+          const monthPost = date.getMonth();
+          const yearPost = date.getFullYear();
+          const oneJanPost = new Date(date.getFullYear(), 0, 1);
+          const numberOfDaysPost = Math.floor(
+            (date - oneJanPost) / (24 * 60 * 60 * 1000)
           );
-          cardsContainer.appendChild(card);
+          const weekPost = Math.ceil(
+            (date.getDay() + 1 + numberOfDaysPost) / 7
+          );
+
+          // Obteniendo la fecha, semana, mes y año de hoy
+          const currentdate = new Date();
+          const oneJan = new Date(currentdate.getFullYear(), 0, 1);
+          const numberOfDays = Math.floor(
+            (currentdate - oneJan) / (24 * 60 * 60 * 1000)
+          );
+          const week = Math.ceil((currentdate.getDay() + 1 + numberOfDays) / 7);
+          const month = date.getMonth();
+          const year = date.getFullYear();
+          if ((filter = "week")) {
+            if (weekPost == week) {
+              const card = cardCreation(
+                post.title,
+                post.description,
+                post.image,
+                post.fecha,
+                post.tag,
+                post.id
+              );
+              cardsContainer.appendChild(card);
+            }
+          }
+          if ((filter = "month")) {
+            if (monthPost == month) {
+              const card = cardCreation(
+                post.title,
+                post.description,
+                post.image,
+                post.fecha,
+                post.tag,
+                post.id
+              );
+              cardsContainer.appendChild(card);
+            }
+          }
+          if ((filter = "year")) {
+            if (yearPost == year) {
+              const card = cardCreation(
+                post.title,
+                post.description,
+                post.image,
+                post.fecha,
+                post.tag,
+                post.id
+              );
+              cardsContainer.appendChild(card);
+            }
+          } else {
+            const card = cardCreation(
+              post.title,
+              post.description,
+              post.image,
+              post.fecha,
+              post.tag,
+              post.id
+            );
+            cardsContainer.appendChild(card);
+          }
         }
       }
     });
