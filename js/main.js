@@ -3,23 +3,8 @@ import { removePostMethod } from "./removePost.js";
 import { getAllPosts } from "./getPostsAndFilters.js";
 const cardsContainer = document.querySelector("#cardsContainer");
 
-// Botón y evento ordenar por fecha
 
-const orderButton = document.querySelector("#orderByButton");
-let descendingOrder = true;
-
-orderButton.addEventListener("click", (e) => {
-  e.preventDefault();
-  console.log("boton activado");
-  descendingOrder = !descendingOrder;
-  cardsContainer.innerHTML = "";
-  getAllPosts();
-  $("#cardsContainer").load(window.location.href + " #cardsContainer");
-});
-
-// Método Get All Posts
-
-getAllPosts(); // Mandamos llamar al método getAllPosts quien obtiene los datos de firebase y los usa para construir las cards mediante cardCreation
+//getAllPosts(); // Mandamos llamar al método getAllPosts quien obtiene los datos de firebase y los usa para construir las cards mediante cardCreation
 
 // Metodo Get a Post (obteniendo la info de un solo post)
 
