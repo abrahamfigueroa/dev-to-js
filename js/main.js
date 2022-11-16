@@ -1,5 +1,6 @@
 import db from "./environment.js";
 import { removePostMethod } from "./removePost.js";
+import { getAllPosts } from "./getPostsAndFilters.js";
 const cardsContainer = document.querySelector("#cardsContainer");
 
 // Botón y evento ordenar por fecha
@@ -18,58 +19,7 @@ orderButton.addEventListener("click", (e) => {
 
 // Método Get All Posts
 
-const getAllPosts = () => {
-  fetch(db + ".json", {
-    method: "GET",
-  })
-    .then((response) => response.json())
-    .then((result) => {
-      const keys = Object.keys(result);
-      const allPostsArray = keys.reduce((prev, act) => {
-        const postAct = result[act];
-        const postCompleto = {
-          id: act,
-          ...postAct,
-        };
-        prev.push(postCompleto);
-        return prev;
-      }, []);
-      console.log(allPostsArray);
-      if (descendingOrder == true) {
-        for (const post of allPostsArray.reverse()) {
-          const date=  new Date(post.fecha)
-          let month = date.getMonth();
-          console.log(month);
-          const card = cardCreation(
-            post.title,
-            post.description,
-            post.image,
-            post.fecha,
-            post.tag,
-            post.id
-          );
-          cardsContainer.appendChild(card);
-        }
-      } else {
-        for (const post of allPostsArray) {
-          const date=  new Date(post.fecha)
-          let month = date.getMonth();
-          console.log(month);
-          const card = cardCreation(
-            post.title,
-            post.description,
-            post.image,
-            post.fecha,
-            post.tag,
-            post.id
-          );
-          cardsContainer.appendChild(card);
-        }
-      }
-    });
-};
-
-getAllPosts(descendingOrder); // Mandamos llamar al método getAllPosts quien obtiene los datos de firebase y los usa para construir las cards mediante cardCreation
+getAllPosts(); // Mandamos llamar al método getAllPosts quien obtiene los datos de firebase y los usa para construir las cards mediante cardCreation
 
 // Metodo Get a Post (obteniendo la info de un solo post)
 
@@ -84,7 +34,7 @@ const getAPosts = (db, id) => {
 
 // Card Creation Method
 
-const cardCreation = (
+export const cardCreation = (
   nombre,
   descripcion,
   imagen,
