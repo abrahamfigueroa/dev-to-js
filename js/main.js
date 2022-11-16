@@ -3,9 +3,6 @@ import { removePostMethod } from "./removePost.js";
 import { getAllPosts } from "./getPostsAndFilters.js";
 const cardsContainer = document.querySelector("#cardsContainer");
 
-
-//getAllPosts(); // Mandamos llamar al método getAllPosts quien obtiene los datos de firebase y los usa para construir las cards mediante cardCreation
-
 // Metodo Get a Post (obteniendo la info de un solo post)
 
 const getAPosts = (db, id) => {
@@ -76,7 +73,7 @@ export const cardCreation = (
   cardBody.appendChild(name);
   cardBody.appendChild(tagsArray);
   if (etiquetas != null) tagsArray.appendChild(tags);
-  // cardBody.appendChild(editButton);
+  // cardBody.appendChild(editButton); Este es el botón home que fué censurado en el home XD
   // cardBody.appendChild(deleteButton);
   card.appendChild(cardBody);
   return card;
