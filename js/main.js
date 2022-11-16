@@ -1,5 +1,6 @@
 import db from "./environment.js";
 import { removePostMethod } from "./removePost.js";
+// import { idFunction } from "./create-post-detail.js";
 const cardsContainer = document.querySelector("#cardsContainer");
 
 // Botón y evento ordenar por fecha
@@ -103,6 +104,7 @@ const cardCreation = (
   const cardBody = document.createElement("div"); // Este es el div del cuerpo de la card
   cardBody.classList.add("card-body");
   cardBody.setAttribute("onclick", "window.location.href='./post.html'");
+  // cardBody.setAttribute("onclick", idFunction(id));
 
   const creationDate = document.createElement("p"); // Fecha de creación del post
   creationDate.classList.add("card-text");
