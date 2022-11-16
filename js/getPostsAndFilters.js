@@ -1,44 +1,38 @@
 import db from "./environment.js";
 import { cardCreation } from "./main.js";
 const orderButton = document.querySelector("#orderByButton");
-let descendingOrder = true;
 const thisWeek = document.querySelector("#thisWeek");
 const thisMonth = document.querySelector("#thisMonth");
 const thisYear = document.querySelector("#thisYear");
+let descendingOrder = true;
 
 orderButton.addEventListener("click", (e) => {
   e.preventDefault();
   descendingOrder = !descendingOrder;
-  cardsContainer.innerHTML = "";
   getAllPosts();
   $("#cardsContainer").load(window.location.href + " #cardsContainer");
 });
 
 thisWeek.addEventListener("click", (e) => {
   e.preventDefault();
-  const filter = "week";
-  cardsContainer.innerHTML = "";
-  getAllPosts(filter);
+  getAllPosts("week");
   $("#cardsContainer").load(window.location.href + " #cardsContainer");
 });
 
 thisMonth.addEventListener("click", (e) => {
   e.preventDefault();
-  const filter = "month";
-  cardsContainer.innerHTML = "";
-  getAllPosts(filter);
+  getAllPosts("month");
   $("#cardsContainer").load(window.location.href + " #cardsContainer");
 });
 
 thisYear.addEventListener("click", (e) => {
   e.preventDefault();
-  const filter = "year";
-  cardsContainer.innerHTML = "";
-  getAllPosts(filter);
+  getAllPosts("year");
   $("#cardsContainer").load(window.location.href + " #cardsContainer");
 });
 
 export const getAllPosts = (filter) => {
+  cardsContainer.innerHTML = "";
   fetch(db + ".json", {
     method: "GET",
   })
@@ -77,7 +71,8 @@ export const getAllPosts = (filter) => {
           const week = Math.ceil((currentdate.getDay() + 1 + numberOfDays) / 7);
           const month = date.getMonth();
           const year = date.getFullYear();
-          if ((filter = "week")) {
+          if (filter == "week") {
+            cardsContainer.innerHTML = "";
             if (weekPost == week) {
               const card = cardCreation(
                 post.title,
@@ -88,9 +83,11 @@ export const getAllPosts = (filter) => {
                 post.id
               );
               cardsContainer.appendChild(card);
+              console.log("Filtrando por semana");
             }
           }
-          if ((filter = "month")) {
+          if (filter == "month") {
+            cardsContainer.innerHTML = "";
             if (monthPost == month) {
               const card = cardCreation(
                 post.title,
@@ -101,9 +98,11 @@ export const getAllPosts = (filter) => {
                 post.id
               );
               cardsContainer.appendChild(card);
+              console.log("Filtrando por mes");
             }
           }
-          if ((filter = "year")) {
+          if (filter === "year") {
+            cardsContainer.innerHTML = "";
             if (yearPost == year) {
               const card = cardCreation(
                 post.title,
@@ -114,6 +113,7 @@ export const getAllPosts = (filter) => {
                 post.id
               );
               cardsContainer.appendChild(card);
+              console.log("Filtrando por año");
             }
           } else {
             const card = cardCreation(
@@ -150,7 +150,8 @@ export const getAllPosts = (filter) => {
           const week = Math.ceil((currentdate.getDay() + 1 + numberOfDays) / 7);
           const month = date.getMonth();
           const year = date.getFullYear();
-          if ((filter = "week")) {
+          if (filter === "week") {
+            cardsContainer.innerHTML = "";
             if (weekPost == week) {
               const card = cardCreation(
                 post.title,
@@ -161,9 +162,11 @@ export const getAllPosts = (filter) => {
                 post.id
               );
               cardsContainer.appendChild(card);
+              console.log("Filtrando por semana, invertida");
             }
           }
-          if ((filter = "month")) {
+          if (filter === "month") {
+            cardsContainer.innerHTML = "";
             if (monthPost == month) {
               const card = cardCreation(
                 post.title,
@@ -174,9 +177,11 @@ export const getAllPosts = (filter) => {
                 post.id
               );
               cardsContainer.appendChild(card);
+              console.log("Filtrando por mes, invertido");
             }
           }
-          if ((filter = "year")) {
+          if (filter === "year") {
+            cardsContainer.innerHTML = "";
             if (yearPost == year) {
               const card = cardCreation(
                 post.title,
@@ -187,6 +192,7 @@ export const getAllPosts = (filter) => {
                 post.id
               );
               cardsContainer.appendChild(card);
+              console.log("Filtrando por año, invertido");
             }
           } else {
             const card = cardCreation(
