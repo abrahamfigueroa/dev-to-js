@@ -56,7 +56,7 @@ export const getAllPosts = (filter) => {
         for (const post of allPostsArray.reverse()) {
           // Obteniendo la fecha, semana, mes y año del post
           const date = new Date(post.fecha);
-          const monthPost = date.getMonth();
+          const monthPost = date.getMonth() + 1;
           const yearPost = date.getFullYear();
           const oneJanPost = new Date(date.getFullYear(), 0, 1);
           const numberOfDaysPost = Math.floor(
@@ -73,12 +73,13 @@ export const getAllPosts = (filter) => {
             (currentdate - oneJan) / (24 * 60 * 60 * 1000)
           );
           const week = Math.ceil((currentdate.getDay() + 1 + numberOfDays) / 7);
-          const month = date.getMonth();
-          const year = date.getFullYear();
+          const month = currentdate.getMonth() + 1;
+          const year = currentdate.getFullYear();
           if (filter == "week") {
-            cardsContainer.innerHTML = "";
-            if (weekPost == week) {
-              console.log("Filtrando por semana");
+            if (weekPost == week && yearPost == year) {
+              console.log(
+                "Semana actual: " + week + ", Semana del post: " + weekPost
+              );
               const card = cardCreation(
                 post.title,
                 post.description,
@@ -91,9 +92,10 @@ export const getAllPosts = (filter) => {
             }
           }
           if (filter == "month") {
-            cardsContainer.innerHTML = "";
-            if (monthPost == month) {
-              console.log("Filtrando por mes");
+            if (monthPost == month && yearPost == year) {
+              console.log(
+                "Mes actual: " + month + ", Mes del post: " + monthPost
+              );
               const card = cardCreation(
                 post.title,
                 post.description,
@@ -106,9 +108,10 @@ export const getAllPosts = (filter) => {
             }
           }
           if (filter === "year") {
-            cardsContainer.innerHTML = "";
             if (yearPost == year) {
-              console.log("Filtrando por año");
+              console.log(
+                "Año actual: " + year + ", Año del post: " + yearPost
+              );
               const card = cardCreation(
                 post.title,
                 post.description,
@@ -138,7 +141,7 @@ export const getAllPosts = (filter) => {
         for (const post of allPostsArray) {
           // Obteniendo la fecha, semana, mes y año del post
           const date = new Date(post.fecha);
-          const monthPost = date.getMonth();
+          const monthPost = date.getMonth() + 1;
           const yearPost = date.getFullYear();
           const oneJanPost = new Date(date.getFullYear(), 0, 1);
           const numberOfDaysPost = Math.floor(
@@ -155,11 +158,13 @@ export const getAllPosts = (filter) => {
             (currentdate - oneJan) / (24 * 60 * 60 * 1000)
           );
           const week = Math.ceil((currentdate.getDay() + 1 + numberOfDays) / 7);
-          const month = date.getMonth();
-          const year = date.getFullYear();
+          const month = currentdate.getMonth() + 1;
+          const year = currentdate.getFullYear();
           if (filter === "week") {
-            cardsContainer.innerHTML = "";
             if (weekPost == week) {
+              console.log(
+                "Semana actual: " + week + ", Semana del post: " + weekPost
+              );
               const card = cardCreation(
                 post.title,
                 post.description,
@@ -173,8 +178,10 @@ export const getAllPosts = (filter) => {
             }
           }
           if (filter === "month") {
-            cardsContainer.innerHTML = "";
-            if (monthPost == month) {
+            if (monthPost == month && yearPost == year) {
+              console.log(
+                "Mes actual: " + month + ", Mes del post: " + monthPost
+              );
               const card = cardCreation(
                 post.title,
                 post.description,
@@ -188,8 +195,10 @@ export const getAllPosts = (filter) => {
             }
           }
           if (filter === "year") {
-            cardsContainer.innerHTML = "";
             if (yearPost == year) {
+              console.log(
+                "Año actual: " + year + ", Año del post: " + yearPost
+              );
               const card = cardCreation(
                 post.title,
                 post.description,

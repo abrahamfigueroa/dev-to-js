@@ -65,11 +65,11 @@ export const cardCreation = (
   const deleteButton = document.createElement("a"); // Boton eliminar
   deleteButton.classList.add("btn", "btn-danger", "buttonToRemoveCard");
   deleteButton.innerText = "Borrar";
-  deleteButton.addEventListener("click", () => {
-    removePostMethod(db, id);
-    cardsContainer.innerHTML = "";
-    getAllPosts(descendingOrder);
-  });
+  // deleteButton.addEventListener("click", () => {
+  //   removePostMethod(db, id);
+  //   cardsContainer.innerHTML = "";
+  //   getAllPosts(descendingOrder);
+  // });
 
   if (imagen != null) cardBody.appendChild(img); // Si el campo de imagen esta vacío, se omite añadir este elemento al DOM
   if (fechaDeCreacion != null) cardBody.appendChild(creationDate); // Si el campo de fecha de creación esta vacío, se omite añadir este elemento al DOM
